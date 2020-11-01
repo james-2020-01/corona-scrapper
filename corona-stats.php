@@ -24,7 +24,7 @@ $crawler->filter('#main_table_countries_today')->each(function ($node) {
                 $attr = $cNode->extract(['_name', '_text', '_class']);
                 
                 if( $count < 7 && ($count > 0) ){
-                    //Switch on the type of variable to add the key expected Later
+                    //Switch on the itteration to add the key for the appropriate variable
                     switch ($count) {
                         case '1':
                             $country["Country"]=$cNode->text();
@@ -61,5 +61,11 @@ $crawler->filter('#main_table_countries_today')->each(function ($node) {
 
 //Trim the array to remove the region data
 $final_countries = array_slice($countries, 8, count($countries)-17);
-var_dump($final_countries);
+
+$json = json_encode($final_countries);
+var_dump($json);
+//
+$file_output = fopen('coronavirus.json', 'w');
+fwrite($file_output, $json);
+fclose();
 ?>
