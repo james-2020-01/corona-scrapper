@@ -29,30 +29,9 @@ $crawler->filter('#main_table_countries_today')->each(function ($node) {
                     array_push($country, $cNode->text());
                 }
                 $count++;
-
-                // print "__________________________\n";
-                // print "        ".$count++."      \n";
-                // print "__________________________\n";
-                // print $cNode->text()."\n";
-                // print $attr[0][2]."\n";
-                // print "--------------------------\n";
             });
             array_push($countries, $country);
         }
-        //var_dump($attributes);
-        //die();
-        // if($rowTextArray[0] == $countCountries){
-        //     $country = array(
-        //         "Country"=> $rowTextArray[1],
-        //         "total cases"=> $rowTextArray[2],
-        //         "new cases"=>$rowTextArray[3],
-        //         "total deaths"=> $rowTextArray[4],
-        //         "new deaths"=>$rowTextArray[5],
-        //         //"total recovered"=>$rowTextArray[6]
-        //     );
-        //     array_push($countries ,json_encode($country));
-        //     $countCountries++;
-        // }
     });
     
 });
