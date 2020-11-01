@@ -17,49 +17,45 @@ $crawler->filter('#main_table_countries_today')->each(function ($node) {
         global $count, $country, $countries;
         $attributes = $subNode->extract(['_name', '_text', '_class']);
 
-        //print $attributes;
-        //Remove everything not country related
-        if($attributes[0][2] == ""){
-            $country = Array();
-            $count = 0;
+        $country = Array();
+        $count = 0;
 
-            //Filter all cells in the Row
-            $subNode->filterXpath("//td")->each(function ($cNode) {
-                global $count, $country;
-                $attr = $cNode->extract(['_name', '_text', '_class']);
-                
-                if( $count < 7 && ($count > 0) ){
-                    //Switch on the itteration to add the key for the appropriate variable
-                    switch ($count) {
-                        case '1':
-                            $country["Country"]=$cNode->text();
-                            break;
-                        case '2':
-                            $country["total cases"]=$cNode->text();
-                            break;
-                        case '3':
-                            $country["new cases"]=$cNode->text();
-                            break;
-                        case '4':
-                            $country["total deaths"]=$cNode->text();
-                            break;
-                        case '5':
-                            $country["new deaths"]=$cNode->text();
-                            break;
-                        case '6':
-                            $country["total recovered"]=$cNode->text();
-                            break;
-                        default:
-                            #$country["Country"]=$cNode->text();
-                            break;
-                    }
-                    #array_push($country, $cNode->text());
+        //Filter all cells in the Row
+        $subNode->filterXpath("//td")->each(function ($cNode) {
+            global $count, $country;
+            $attr = $cNode->extract(['_name', '_text', '_class']);
+            
+            if( $count < 7 && ($count > 0) ){
+                //Switch on the itteration to add the key for the appropriate variable
+                switch ($count) {
+                    case '1':
+                        $country["Country"]=$cNode->text();
+                        break;
+                    case '2':
+                        $country["total cases"]=$cNode->text();
+                        break;
+                    case '3':
+                        $country["new cases"]=$cNode->text();
+                        break;
+                    case '4':
+                        $country["total deaths"]=$cNode->text();
+                        break;
+                    case '5':
+                        $country["new deaths"]=$cNode->text();
+                        break;
+                    case '6':
+                        $country["total recovered"]=$cNode->text();
+                        break;
+                    default:
+                        #$country["Country"]=$cNode->text();
+                        break;
                 }
-                $count++;
-            });
-            //Add the newly created country to the array
-            array_push($countries, $country);
-        }
+                #array_push($country, $cNode->text());
+            }
+            $count++;
+        });
+        //Add the newly created country to the array
+        array_push($countries, $country);
     });
     
 });
