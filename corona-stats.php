@@ -24,8 +24,8 @@ $crawler->filter('#main_table_countries_today')->each(function ($node) {
                 global $count, $country;
                 $attr = $cNode->extract(['_name', '_text', '_class']);
                 
-                if( $count < 6 && ($count > 0) ){
-
+                if( $count < 7 && ($count > 0) ){
+                    
                     array_push($country, $cNode->text());
                 }
                 $count++;
